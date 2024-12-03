@@ -1,5 +1,8 @@
 #include <fstream>
 #include "ConnectWindow.h"
+#include <fstream>
+#include <msclr\marshal_cppstd.h> // Для преобразования String^ в std::string
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 namespace DBC {
@@ -81,11 +84,13 @@ namespace DBC {
 
 	private: System::Windows::Forms::Button^ to_txt_btn;
 
-	private: System::Windows::Forms::TextBox^ string_sep;
 
-	private: System::Windows::Forms::Label^ label9;
-	private: System::Windows::Forms::TextBox^ outputFilePath;
-	private: System::Windows::Forms::Label^ label10;
+
+
+
+
+	private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
+
 
 
 	protected:
@@ -131,10 +136,7 @@ namespace DBC {
 			this->refresh = (gcnew System::Windows::Forms::Button());
 			this->close_btn = (gcnew System::Windows::Forms::Button());
 			this->to_txt_btn = (gcnew System::Windows::Forms::Button());
-			this->string_sep = (gcnew System::Windows::Forms::TextBox());
-			this->label9 = (gcnew System::Windows::Forms::Label());
-			this->outputFilePath = (gcnew System::Windows::Forms::TextBox());
-			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -344,7 +346,7 @@ namespace DBC {
 			// 
 			this->refresh->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->refresh->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->refresh->Location = System::Drawing::Point(653, 269);
+			this->refresh->Location = System::Drawing::Point(629, 269);
 			this->refresh->Name = L"refresh";
 			this->refresh->Size = System::Drawing::Size(64, 36);
 			this->refresh->TabIndex = 24;
@@ -355,7 +357,7 @@ namespace DBC {
 			// close_btn
 			// 
 			this->close_btn->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->close_btn->Location = System::Drawing::Point(629, 5);
+			this->close_btn->Location = System::Drawing::Point(617, 3);
 			this->close_btn->Name = L"close_btn";
 			this->close_btn->Size = System::Drawing::Size(76, 38);
 			this->close_btn->TabIndex = 25;
@@ -373,39 +375,10 @@ namespace DBC {
 			this->to_txt_btn->UseVisualStyleBackColor = true;
 			this->to_txt_btn->Click += gcnew System::EventHandler(this, &MainWindow::to_txt_btn_Click);
 			// 
-			// string_sep
+			// saveFileDialog1
 			// 
-			this->string_sep->Location = System::Drawing::Point(12, 230);
-			this->string_sep->Name = L"string_sep";
-			this->string_sep->Size = System::Drawing::Size(75, 22);
-			this->string_sep->TabIndex = 29;
-			this->string_sep->TextChanged += gcnew System::EventHandler(this, &MainWindow::string_sep_TextChanged);
-			// 
-			// label9
-			// 
-			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(93, 233);
-			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(57, 13);
-			this->label9->TabIndex = 31;
-			this->label9->Text = L"Separator";
-			this->label9->Click += gcnew System::EventHandler(this, &MainWindow::label9_Click);
-			// 
-			// outputFilePath
-			// 
-			this->outputFilePath->Location = System::Drawing::Point(12, 258);
-			this->outputFilePath->Name = L"outputFilePath";
-			this->outputFilePath->Size = System::Drawing::Size(100, 22);
-			this->outputFilePath->TabIndex = 32;
-			// 
-			// label10
-			// 
-			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(118, 261);
-			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(87, 13);
-			this->label10->TabIndex = 33;
-			this->label10->Text = L"Save point data";
+			this->saveFileDialog1->DefaultExt = L"txt";
+			this->saveFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &MainWindow::saveFileDialog1_FileOk);
 			// 
 			// MainWindow
 			// 
@@ -413,12 +386,8 @@ namespace DBC {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(717, 557);
+			this->ClientSize = System::Drawing::Size(701, 541);
 			this->ControlBox = false;
-			this->Controls->Add(this->label10);
-			this->Controls->Add(this->outputFilePath);
-			this->Controls->Add(this->label9);
-			this->Controls->Add(this->string_sep);
 			this->Controls->Add(this->to_txt_btn);
 			this->Controls->Add(this->close_btn);
 			this->Controls->Add(this->refresh);
@@ -535,6 +504,30 @@ namespace DBC {
 
 	private: System::Void add_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
+			// Проверка имени тарифа
+			String^ tariffName = Tariff_txt_add->Text->Trim();
+			if (String::IsNullOrWhiteSpace(tariffName)) {
+				MessageBox::Show("Tariff name cannot be empty.",
+					"Error",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Error);
+				return;
+			}
+
+			// Проверка на существование тарифа
+			String^ checkQuery = "SELECT COUNT(*) FROM " + Table_txt->Text + " WHERE TariffName = @TariffName;";
+			SqlCommand^ checkCommand = gcnew SqlCommand(checkQuery, connection);
+			checkCommand->Parameters->AddWithValue("@TariffName", tariffName);
+			int existingCount = Convert::ToInt32(checkCommand->ExecuteScalar());
+
+			if (existingCount > 0) {
+				MessageBox::Show("A tariff with this name already exists.",
+					"Error",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Error);
+				return;
+			}
+
 			// Получение и проверка значения Cost
 			double cost = Convert::ToDouble(Cost_txt_add->Text);
 			if (cost < 1) {
@@ -592,7 +585,7 @@ namespace DBC {
 			SqlCommand^ sqlCommand = gcnew SqlCommand(insertQuery, connection);
 
 			// Добавление параметров
-			sqlCommand->Parameters->AddWithValue("@TariffName", Tariff_txt_add->Text);
+			sqlCommand->Parameters->AddWithValue("@TariffName", tariffName);
 			sqlCommand->Parameters->AddWithValue("@Cost", cost);
 			sqlCommand->Parameters->AddWithValue("@Discount", discountInput); // Сохраняем как введено пользователем
 			sqlCommand->Parameters->AddWithValue("@CostWithDiscount", costWithDiscount); // Сохраняем цену с учётом скидки
@@ -625,6 +618,7 @@ namespace DBC {
 				MessageBoxIcon::Error);
 		}
 	}
+
 
 	private: System::Void TariffName_search_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
@@ -747,7 +741,7 @@ namespace DBC {
 					return;
 				}
 
-				// SQL-запрос для процентной скидки (поиск по текстовому представлению скидки)
+				// SQL-запрос для процентной скидки
 				searchQuery = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text +
 					" WHERE Discount LIKE @SearchValue;";
 			}
@@ -762,7 +756,7 @@ namespace DBC {
 					return;
 				}
 
-				// SQL-запрос для фиксированной скидки
+				// SQL-запрос для фиксированной скидки (поиск как строкового значения)
 				searchQuery = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text +
 					" WHERE Discount = @SearchValue;";
 			}
@@ -770,12 +764,13 @@ namespace DBC {
 			// Подготовка команды SQL
 			SqlCommand^ sqlCommand = gcnew SqlCommand(searchQuery, connection);
 
-			// Для процентной скидки ищем как строку с % (например "50%"), а для фиксированной передаем как число
+			// Для процентной скидки ищем как строку с % (например "50%"), а для фиксированной передаём строку или число
 			if (searchValue->EndsWith("%")) {
 				sqlCommand->Parameters->AddWithValue("@SearchValue", searchValue);
 			}
 			else {
-				sqlCommand->Parameters->AddWithValue("@SearchValue", Convert::ToDouble(searchValue));
+				// Приводим к строке для корректного сравнения в базе
+				sqlCommand->Parameters->AddWithValue("@SearchValue", searchValue);
 			}
 
 			// Выполнение команды и заполнение таблицы результатами
@@ -783,8 +778,17 @@ namespace DBC {
 			DataTable^ dataTable = gcnew DataTable();
 			sqlDataAdapter->Fill(dataTable);
 
-			// Привязка результатов поиска к DataGridView
-			dataGridView1->DataSource = dataTable;
+			// Проверка, есть ли результаты
+			if (dataTable->Rows->Count == 0) {
+				MessageBox::Show("No results found for the specified discount.",
+					"Info",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Information);
+			}
+			else {
+				// Привязка результатов поиска к DataGridView
+				dataGridView1->DataSource = dataTable;
+			}
 
 			// Очистка поля поиска
 			Discount_txt_search->Text = "";
@@ -802,6 +806,7 @@ namespace DBC {
 				MessageBoxIcon::Error);
 		}
 	}
+
 	private: System::Void Delete_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			// Проверка на пустой ввод
@@ -893,94 +898,7 @@ namespace DBC {
 		Application::Exit();
 	}
 	private: System::Void to_txt_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-		try {
-			// Проверка на пустой путь для файла
-			if (String::IsNullOrWhiteSpace(outputFilePath->Text)) {
-				MessageBox::Show("Please specify a valid file path for exporting data.",
-					"Error",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Error);
-				return;
-			}
-
-			// Проверка существования таблицы
-			if (String::IsNullOrWhiteSpace(Table_txt->Text)) {
-				MessageBox::Show("Please specify a valid table name.",
-					"Error",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Error);
-				return;
-			}
-
-			// SQL-запрос для получения всех данных из таблицы с вычислением стоимости с учётом скидки
-			String^ query = "SELECT ID, TariffName, Cost, Discount, " +
-				"CASE " +
-				"  WHEN Discount LIKE '%%' THEN Cost * (1 - CAST(SUBSTRING(Discount, 0, LEN(Discount) - 1) AS FLOAT) / 100) " + // Процентная скидка
-				"  ELSE Cost - CAST(Discount AS INT) " + // Фиксированная скидка
-				"END AS CostWithDiscount " +
-				"FROM " + Table_txt->Text;
-
-			SqlCommand^ command = gcnew SqlCommand(query, connection);
-			SqlDataReader^ reader = command->ExecuteReader();
-
-			// Проверка наличия данных
-			if (!reader->HasRows) {
-				MessageBox::Show("No data found in the table to export.",
-					"Info",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Information);
-				reader->Close();
-				return;
-			}
-
-			// Создание файла для записи
-			StreamWriter^ writer = gcnew StreamWriter(outputFilePath->Text);
-
-			// Запись заголовков (имена столбцов)
-			for (int i = 0; i < reader->FieldCount; i++) {
-				writer->Write(reader->GetName(i));
-				if (i < reader->FieldCount - 1)
-					writer->Write(string_sep->Text);
-			}
-			writer->WriteLine();
-
-			// Запись данных из таблицы
-			while (reader->Read()) {
-				for (int i = 0; i < reader->FieldCount; i++) {
-					writer->Write(reader->GetValue(i)->ToString());
-					if (i < reader->FieldCount - 1)
-						writer->Write(string_sep->Text);
-				}
-				writer->WriteLine();
-			}
-
-			// Закрытие ресурсов
-			writer->Close();
-			reader->Close();
-
-			MessageBox::Show("Data exported successfully to: " + outputFilePath->Text,
-				"Success",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Information);
-		}
-		catch (IOException^ ioEx) {
-			MessageBox::Show("File error: " + ioEx->Message,
-				"Error",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Error);
-		}
-		catch (SqlException^ sqlEx) {
-			MessageBox::Show("Database error: " + sqlEx->Message,
-				"Error",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Error);
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("An unexpected error occurred: " + ex->Message,
-				"Error",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Error);
-		}
+		saveFileDialog1->ShowDialog(); // Открыть диалоговое окно сохранения файла
 	}
 	private: System::Void string_sep_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -990,93 +908,55 @@ namespace DBC {
 	}
 	private: System::Void box_sep_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-	private: System::Void to_csv_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-		SqlDataReader^ reader = nullptr;
-		try
-		{
-			// Проверяем наличие текста в Table_txt и outputFilePath
-			if (String::IsNullOrWhiteSpace(Table_txt->Text) || String::IsNullOrWhiteSpace(outputFilePath->Text))
-			{
-				MessageBox::Show("The table name or path to save the file is not specified.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-				return;
-			}
-
-			// SQL-запрос для получения всех данных из таблицы
-			String^ query = "SELECT * FROM [" + Table_txt->Text + "]"; // Используем квадратные скобки для имени таблицы
-			SqlCommand^ command = gcnew SqlCommand(query, connection);
-
-			// Выполняем запрос и открываем DataReader
-			reader = command->ExecuteReader();
-
-			// Создание файла для записи
-			StreamWriter^ writer = gcnew StreamWriter(outputFilePath->Text);
-
-			// Запись заголовков (имена столбцов)
-			for (int i = 0; i < reader->FieldCount; i++)
-			{
-				String^ columnName = reader->GetName(i);
-
-				// Оборачиваем имя столбца в кавычки, если оно содержит разделитель
-				if (columnName->Contains(string_sep->Text))
-				{
-					columnName = "\"" + columnName + "\"";
-				}
-				writer->Write(columnName);
-
-				if (i < reader->FieldCount - 1)
-					writer->Write(string_sep->Text); // Разделитель
-			}
-			writer->WriteLine();
-
-			// Запись данных из таблицы
-			while (reader->Read())
-			{
-				for (int i = 0; i < reader->FieldCount; i++)
-				{
-					Object^ value = reader->GetValue(i);
-
-					// Если значение NULL, записываем пустую строку
-					String^ valueStr = (value == DBNull::Value) ? "" : value->ToString();
-
-					// Экранирование кавычек в значении
-					if (valueStr->Contains("\""))
-					{
-						valueStr = "\"" + valueStr->Replace("\"", "\"\"") + "\"";
-					}
-
-					// Оборачиваем значение в кавычки, если оно содержит разделитель
-					if (valueStr->Contains(string_sep->Text))
-					{
-						valueStr = "\"" + valueStr + "\"";
-					}
-					writer->Write(valueStr);
-
-					if (i < reader->FieldCount - 1)
-						writer->Write(string_sep->Text); // Разделитель
-				}
-				writer->WriteLine();
-			}
-
-			// Закрытие ресурсов
-			writer->Close();
-		}
-		catch (Exception^ ex)
-		{
-			MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-		finally
-		{
-			// Гарантируем, что DataReader закрыт
-			if (reader != nullptr && !reader->IsClosed)
-			{
-				reader->Close();
-			}
-		}
-	}
+	
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-	};
+private: System::Void saveFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+	String^ filePath = saveFileDialog1->FileName; // Получить путь к файлу
+
+	try {
+
+		// SQL-запрос для извлечения данных из таблицы
+		String^ query = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text + ";";
+		SqlCommand^ command = gcnew SqlCommand(query, connection);
+
+		// Выполнение запроса и чтение данных
+		SqlDataReader^ reader = command->ExecuteReader();
+
+		// Открыть поток для записи в файл
+		std::ofstream outFile(msclr::interop::marshal_as<std::string>(filePath));
+		if (!outFile.is_open()) {
+			MessageBox::Show("Не удалось открыть файл для записи.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		// Запись заголовков столбцов
+		outFile << "ID\tTariffName\tCost\tDiscount\tCostWithDiscount\n";
+
+		// Запись данных из базы в файл
+		while (reader->Read()) {
+			outFile << msclr::interop::marshal_as<std::string>(reader["ID"]->ToString()) << "\t"
+				<< msclr::interop::marshal_as<std::string>(reader["TariffName"]->ToString()) << "\t"
+				<< msclr::interop::marshal_as<std::string>(reader["Cost"]->ToString()) << "\t"
+				<< msclr::interop::marshal_as<std::string>(reader["Discount"]->ToString()) << "\t"
+				<< msclr::interop::marshal_as<std::string>(reader["CostWithDiscount"]->ToString()) << "\n";
+		}
+
+		reader->Close();
+		outFile.close();
+
+		MessageBox::Show("Файл успешно сохранен!", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	catch (Exception^ ex) {
+		MessageBox::Show("Ошибка при сохранении файла: " + ex->Message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+}
+
+private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	saveFileDialog1->ShowDialog(); // Открыть диалоговое окно сохранения файла
+}
+};
 }
 #endif // MAINWINDOW_H
