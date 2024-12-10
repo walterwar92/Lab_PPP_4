@@ -41,68 +41,36 @@ namespace DBC {
 		}
 
 	protected:
-
-
 	private: System::Windows::Forms::Button^ CreateTable_btn;
 	private: System::Windows::Forms::Label^ Create_label;
 	private: System::Windows::Forms::TextBox^ Table_txt;
 	private: System::Windows::Forms::TextBox^ Tariff_txt_add;
 	private: System::Windows::Forms::TextBox^ PerMin_txt_add;
 	private: System::Windows::Forms::TextBox^ ID_txt_record;
-
-
-
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Button^ add_btn;
-
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::TextBox^ TariffName_txt_search;
 	private: System::Windows::Forms::Button^ TariffName_search_btn;
 	private: System::Windows::Forms::TextBox^ Revenue_txt_search;
-
-
-
 	private: System::Windows::Forms::TextBox^ PerMin_txt_search;
-
-
-
 	private: System::Windows::Forms::Button^ PerMin_search_btn;
 	private: System::Windows::Forms::Button^ Revenue_search_btn;
-
-
-
-
-
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ Id_txt_delete;
-
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Button^ Delete_btn;
-
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::Button^ refresh;
 	private: System::Windows::Forms::Button^ close_btn;
-
-
 	private: System::Windows::Forms::Button^ to_txt_btn;
-
-
-
-
-
-
 	private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 	private: System::Windows::Forms::TextBox^ Min_txt_Record;
-
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Button^ RecordMinutes_button;
-
-
-
 	protected:
 
 
@@ -371,7 +339,7 @@ namespace DBC {
 			// close_btn
 			// 
 			this->close_btn->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->close_btn->Location = System::Drawing::Point(617, 3);
+			this->close_btn->Location = System::Drawing::Point(601, 2);
 			this->close_btn->Name = L"close_btn";
 			this->close_btn->Size = System::Drawing::Size(76, 38);
 			this->close_btn->TabIndex = 25;
@@ -426,7 +394,7 @@ namespace DBC {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(693, 533);
+			this->ClientSize = System::Drawing::Size(722, 562);
 			this->ControlBox = false;
 			this->Controls->Add(this->RecordMinutes_button);
 			this->Controls->Add(this->label8);
