@@ -125,6 +125,7 @@ namespace DBC {
 			this->txt_server->Name = L"txt_server";
 			this->txt_server->Size = System::Drawing::Size(238, 22);
 			this->txt_server->TabIndex = 5;
+			this->txt_server->TextChanged += gcnew System::EventHandler(this, &ConnectWindow::txt_server_TextChanged);
 			// 
 			// label3
 			// 
@@ -141,7 +142,7 @@ namespace DBC {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(331, 143);
+			this->ClientSize = System::Drawing::Size(327, 139);
 			this->ControlBox = false;
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->txt_server);
@@ -189,5 +190,7 @@ namespace DBC {
 	}
 	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-	};
+	private: System::Void txt_server_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

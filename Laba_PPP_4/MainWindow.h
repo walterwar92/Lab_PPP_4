@@ -47,8 +47,10 @@ namespace DBC {
 	private: System::Windows::Forms::Label^ Create_label;
 	private: System::Windows::Forms::TextBox^ Table_txt;
 	private: System::Windows::Forms::TextBox^ Tariff_txt_add;
-	private: System::Windows::Forms::TextBox^ Cost_txt_add;
-	private: System::Windows::Forms::TextBox^ Discount_txt_add;
+	private: System::Windows::Forms::TextBox^ PerMin_txt_add;
+	private: System::Windows::Forms::TextBox^ ID_txt_record;
+
+
 
 
 	private: System::Windows::Forms::Label^ label1;
@@ -59,14 +61,18 @@ namespace DBC {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::TextBox^ TariffName_txt_search;
 	private: System::Windows::Forms::Button^ TariffName_search_btn;
+	private: System::Windows::Forms::TextBox^ Revenue_txt_search;
 
 
-	private: System::Windows::Forms::TextBox^ Discount_txt_search;
+
+	private: System::Windows::Forms::TextBox^ PerMin_txt_search;
 
 
-	private: System::Windows::Forms::TextBox^ Cost_txt_search;
-	private: System::Windows::Forms::Button^ Cost_search_btn;
-	private: System::Windows::Forms::Button^ Discount_search_btn;
+
+	private: System::Windows::Forms::Button^ PerMin_search_btn;
+	private: System::Windows::Forms::Button^ Revenue_search_btn;
+
+
 
 
 
@@ -90,6 +96,10 @@ namespace DBC {
 
 
 	private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
+	private: System::Windows::Forms::TextBox^ Min_txt_Record;
+
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Button^ RecordMinutes_button;
 
 
 
@@ -114,8 +124,8 @@ namespace DBC {
 			this->Create_label = (gcnew System::Windows::Forms::Label());
 			this->Table_txt = (gcnew System::Windows::Forms::TextBox());
 			this->Tariff_txt_add = (gcnew System::Windows::Forms::TextBox());
-			this->Cost_txt_add = (gcnew System::Windows::Forms::TextBox());
-			this->Discount_txt_add = (gcnew System::Windows::Forms::TextBox());
+			this->PerMin_txt_add = (gcnew System::Windows::Forms::TextBox());
+			this->ID_txt_record = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -123,10 +133,10 @@ namespace DBC {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->TariffName_txt_search = (gcnew System::Windows::Forms::TextBox());
 			this->TariffName_search_btn = (gcnew System::Windows::Forms::Button());
-			this->Discount_txt_search = (gcnew System::Windows::Forms::TextBox());
-			this->Cost_txt_search = (gcnew System::Windows::Forms::TextBox());
-			this->Cost_search_btn = (gcnew System::Windows::Forms::Button());
-			this->Discount_search_btn = (gcnew System::Windows::Forms::Button());
+			this->Revenue_txt_search = (gcnew System::Windows::Forms::TextBox());
+			this->PerMin_txt_search = (gcnew System::Windows::Forms::TextBox());
+			this->PerMin_search_btn = (gcnew System::Windows::Forms::Button());
+			this->Revenue_search_btn = (gcnew System::Windows::Forms::Button());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->Id_txt_delete = (gcnew System::Windows::Forms::TextBox());
@@ -137,6 +147,9 @@ namespace DBC {
 			this->close_btn = (gcnew System::Windows::Forms::Button());
 			this->to_txt_btn = (gcnew System::Windows::Forms::Button());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->Min_txt_Record = (gcnew System::Windows::Forms::TextBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->RecordMinutes_button = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -171,29 +184,29 @@ namespace DBC {
 			// 
 			// Tariff_txt_add
 			// 
-			this->Tariff_txt_add->Location = System::Drawing::Point(12, 80);
+			this->Tariff_txt_add->Location = System::Drawing::Point(12, 64);
 			this->Tariff_txt_add->Name = L"Tariff_txt_add";
 			this->Tariff_txt_add->Size = System::Drawing::Size(165, 22);
 			this->Tariff_txt_add->TabIndex = 3;
 			// 
-			// Cost_txt_add
+			// PerMin_txt_add
 			// 
-			this->Cost_txt_add->Location = System::Drawing::Point(12, 108);
-			this->Cost_txt_add->Name = L"Cost_txt_add";
-			this->Cost_txt_add->Size = System::Drawing::Size(165, 22);
-			this->Cost_txt_add->TabIndex = 4;
+			this->PerMin_txt_add->Location = System::Drawing::Point(12, 92);
+			this->PerMin_txt_add->Name = L"PerMin_txt_add";
+			this->PerMin_txt_add->Size = System::Drawing::Size(165, 22);
+			this->PerMin_txt_add->TabIndex = 4;
 			// 
-			// Discount_txt_add
+			// ID_txt_record
 			// 
-			this->Discount_txt_add->Location = System::Drawing::Point(12, 136);
-			this->Discount_txt_add->Name = L"Discount_txt_add";
-			this->Discount_txt_add->Size = System::Drawing::Size(165, 22);
-			this->Discount_txt_add->TabIndex = 5;
+			this->ID_txt_record->Location = System::Drawing::Point(12, 193);
+			this->ID_txt_record->Name = L"ID_txt_record";
+			this->ID_txt_record->Size = System::Drawing::Size(165, 22);
+			this->ID_txt_record->TabIndex = 5;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(183, 83);
+			this->label1->Location = System::Drawing::Point(183, 67);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(66, 13);
 			this->label1->TabIndex = 6;
@@ -203,25 +216,25 @@ namespace DBC {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(183, 111);
+			this->label2->Location = System::Drawing::Point(183, 95);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(30, 13);
+			this->label2->Size = System::Drawing::Size(42, 13);
 			this->label2->TabIndex = 7;
-			this->label2->Text = L"Cost";
+			this->label2->Text = L"PerMin";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(183, 139);
+			this->label3->Location = System::Drawing::Point(183, 196);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(51, 13);
+			this->label3->Size = System::Drawing::Size(18, 13);
 			this->label3->TabIndex = 8;
-			this->label3->Text = L"Discount";
+			this->label3->Text = L"ID";
 			this->label3->Click += gcnew System::EventHandler(this, &MainWindow::label3_Click);
 			// 
 			// add_btn
 			// 
-			this->add_btn->Location = System::Drawing::Point(12, 165);
+			this->add_btn->Location = System::Drawing::Point(12, 121);
 			this->add_btn->Name = L"add_btn";
 			this->add_btn->Size = System::Drawing::Size(165, 23);
 			this->add_btn->TabIndex = 9;
@@ -232,7 +245,7 @@ namespace DBC {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(15, 61);
+			this->label4->Location = System::Drawing::Point(15, 45);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(54, 13);
 			this->label4->TabIndex = 10;
@@ -240,14 +253,14 @@ namespace DBC {
 			// 
 			// TariffName_txt_search
 			// 
-			this->TariffName_txt_search->Location = System::Drawing::Point(281, 80);
+			this->TariffName_txt_search->Location = System::Drawing::Point(281, 64);
 			this->TariffName_txt_search->Name = L"TariffName_txt_search";
 			this->TariffName_txt_search->Size = System::Drawing::Size(165, 22);
 			this->TariffName_txt_search->TabIndex = 11;
 			// 
 			// TariffName_search_btn
 			// 
-			this->TariffName_search_btn->Location = System::Drawing::Point(452, 78);
+			this->TariffName_search_btn->Location = System::Drawing::Point(452, 62);
 			this->TariffName_search_btn->Name = L"TariffName_search_btn";
 			this->TariffName_search_btn->Size = System::Drawing::Size(113, 23);
 			this->TariffName_search_btn->TabIndex = 12;
@@ -255,44 +268,44 @@ namespace DBC {
 			this->TariffName_search_btn->UseVisualStyleBackColor = true;
 			this->TariffName_search_btn->Click += gcnew System::EventHandler(this, &MainWindow::TariffName_search_btn_Click);
 			// 
-			// Discount_txt_search
+			// Revenue_txt_search
 			// 
-			this->Discount_txt_search->Location = System::Drawing::Point(281, 139);
-			this->Discount_txt_search->Name = L"Discount_txt_search";
-			this->Discount_txt_search->Size = System::Drawing::Size(165, 22);
-			this->Discount_txt_search->TabIndex = 13;
+			this->Revenue_txt_search->Location = System::Drawing::Point(281, 123);
+			this->Revenue_txt_search->Name = L"Revenue_txt_search";
+			this->Revenue_txt_search->Size = System::Drawing::Size(165, 22);
+			this->Revenue_txt_search->TabIndex = 13;
 			// 
-			// Cost_txt_search
+			// PerMin_txt_search
 			// 
-			this->Cost_txt_search->Location = System::Drawing::Point(281, 111);
-			this->Cost_txt_search->Name = L"Cost_txt_search";
-			this->Cost_txt_search->Size = System::Drawing::Size(165, 22);
-			this->Cost_txt_search->TabIndex = 14;
+			this->PerMin_txt_search->Location = System::Drawing::Point(281, 95);
+			this->PerMin_txt_search->Name = L"PerMin_txt_search";
+			this->PerMin_txt_search->Size = System::Drawing::Size(165, 22);
+			this->PerMin_txt_search->TabIndex = 14;
 			// 
-			// Cost_search_btn
+			// PerMin_search_btn
 			// 
-			this->Cost_search_btn->Location = System::Drawing::Point(452, 109);
-			this->Cost_search_btn->Name = L"Cost_search_btn";
-			this->Cost_search_btn->Size = System::Drawing::Size(113, 23);
-			this->Cost_search_btn->TabIndex = 15;
-			this->Cost_search_btn->Text = L"Cost";
-			this->Cost_search_btn->UseVisualStyleBackColor = true;
-			this->Cost_search_btn->Click += gcnew System::EventHandler(this, &MainWindow::Cost_search_btn_Click);
+			this->PerMin_search_btn->Location = System::Drawing::Point(452, 93);
+			this->PerMin_search_btn->Name = L"PerMin_search_btn";
+			this->PerMin_search_btn->Size = System::Drawing::Size(113, 23);
+			this->PerMin_search_btn->TabIndex = 15;
+			this->PerMin_search_btn->Text = L"PerMin";
+			this->PerMin_search_btn->UseVisualStyleBackColor = true;
+			this->PerMin_search_btn->Click += gcnew System::EventHandler(this, &MainWindow::PerMin_search_btn_Click);
 			// 
-			// Discount_search_btn
+			// Revenue_search_btn
 			// 
-			this->Discount_search_btn->Location = System::Drawing::Point(452, 139);
-			this->Discount_search_btn->Name = L"Discount_search_btn";
-			this->Discount_search_btn->Size = System::Drawing::Size(113, 23);
-			this->Discount_search_btn->TabIndex = 16;
-			this->Discount_search_btn->Text = L"Discount";
-			this->Discount_search_btn->UseVisualStyleBackColor = true;
-			this->Discount_search_btn->Click += gcnew System::EventHandler(this, &MainWindow::Discount_search_btn_Click);
+			this->Revenue_search_btn->Location = System::Drawing::Point(452, 123);
+			this->Revenue_search_btn->Name = L"Revenue_search_btn";
+			this->Revenue_search_btn->Size = System::Drawing::Size(113, 23);
+			this->Revenue_search_btn->TabIndex = 16;
+			this->Revenue_search_btn->Text = L"Revenue";
+			this->Revenue_search_btn->UseVisualStyleBackColor = true;
+			this->Revenue_search_btn->Click += gcnew System::EventHandler(this, &MainWindow::Revenue_search_btn_Click);
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(278, 61);
+			this->label5->Location = System::Drawing::Point(278, 45);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(40, 13);
 			this->label5->TabIndex = 17;
@@ -301,7 +314,7 @@ namespace DBC {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(574, 61);
+			this->label6->Location = System::Drawing::Point(574, 45);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(40, 13);
 			this->label6->TabIndex = 18;
@@ -309,7 +322,7 @@ namespace DBC {
 			// 
 			// Id_txt_delete
 			// 
-			this->Id_txt_delete->Location = System::Drawing::Point(577, 79);
+			this->Id_txt_delete->Location = System::Drawing::Point(577, 63);
 			this->Id_txt_delete->Name = L"Id_txt_delete";
 			this->Id_txt_delete->Size = System::Drawing::Size(100, 22);
 			this->Id_txt_delete->TabIndex = 19;
@@ -317,15 +330,16 @@ namespace DBC {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(683, 82);
+			this->label7->Location = System::Drawing::Point(683, 67);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(18, 13);
 			this->label7->TabIndex = 20;
 			this->label7->Text = L"ID";
+			this->label7->Click += gcnew System::EventHandler(this, &MainWindow::label7_Click);
 			// 
 			// Delete_btn
 			// 
-			this->Delete_btn->Location = System::Drawing::Point(577, 107);
+			this->Delete_btn->Location = System::Drawing::Point(577, 91);
 			this->Delete_btn->Name = L"Delete_btn";
 			this->Delete_btn->Size = System::Drawing::Size(100, 23);
 			this->Delete_btn->TabIndex = 21;
@@ -367,7 +381,7 @@ namespace DBC {
 			// 
 			// to_txt_btn
 			// 
-			this->to_txt_btn->Location = System::Drawing::Point(12, 282);
+			this->to_txt_btn->Location = System::Drawing::Point(548, 276);
 			this->to_txt_btn->Name = L"to_txt_btn";
 			this->to_txt_btn->Size = System::Drawing::Size(75, 23);
 			this->to_txt_btn->TabIndex = 27;
@@ -380,14 +394,43 @@ namespace DBC {
 			this->saveFileDialog1->DefaultExt = L"txt";
 			this->saveFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &MainWindow::saveFileDialog1_FileOk);
 			// 
+			// Min_txt_Record
+			// 
+			this->Min_txt_Record->Location = System::Drawing::Point(12, 230);
+			this->Min_txt_Record->Name = L"Min_txt_Record";
+			this->Min_txt_Record->Size = System::Drawing::Size(165, 22);
+			this->Min_txt_Record->TabIndex = 28;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(183, 233);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(26, 13);
+			this->label8->TabIndex = 29;
+			this->label8->Text = L"Min";
+			// 
+			// RecordMinutes_button
+			// 
+			this->RecordMinutes_button->Location = System::Drawing::Point(12, 258);
+			this->RecordMinutes_button->Name = L"RecordMinutes_button";
+			this->RecordMinutes_button->Size = System::Drawing::Size(165, 23);
+			this->RecordMinutes_button->TabIndex = 30;
+			this->RecordMinutes_button->Text = L"Record";
+			this->RecordMinutes_button->UseVisualStyleBackColor = true;
+			this->RecordMinutes_button->Click += gcnew System::EventHandler(this, &MainWindow::RecordMinutes_button_Click);
+			// 
 			// MainWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(701, 541);
+			this->ClientSize = System::Drawing::Size(693, 533);
 			this->ControlBox = false;
+			this->Controls->Add(this->RecordMinutes_button);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->Min_txt_Record);
 			this->Controls->Add(this->to_txt_btn);
 			this->Controls->Add(this->close_btn);
 			this->Controls->Add(this->refresh);
@@ -397,10 +440,10 @@ namespace DBC {
 			this->Controls->Add(this->Id_txt_delete);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
-			this->Controls->Add(this->Discount_search_btn);
-			this->Controls->Add(this->Cost_search_btn);
-			this->Controls->Add(this->Cost_txt_search);
-			this->Controls->Add(this->Discount_txt_search);
+			this->Controls->Add(this->Revenue_search_btn);
+			this->Controls->Add(this->PerMin_search_btn);
+			this->Controls->Add(this->PerMin_txt_search);
+			this->Controls->Add(this->Revenue_txt_search);
 			this->Controls->Add(this->TariffName_search_btn);
 			this->Controls->Add(this->TariffName_txt_search);
 			this->Controls->Add(this->label4);
@@ -408,8 +451,8 @@ namespace DBC {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->Discount_txt_add);
-			this->Controls->Add(this->Cost_txt_add);
+			this->Controls->Add(this->ID_txt_record);
+			this->Controls->Add(this->PerMin_txt_add);
 			this->Controls->Add(this->Tariff_txt_add);
 			this->Controls->Add(this->CreateTable_btn);
 			this->Controls->Add(this->Create_label);
@@ -447,9 +490,9 @@ namespace DBC {
 				Table_txt->Text + " (\n" +
 				"ID INT PRIMARY KEY IDENTITY,\n" +
 				"TariffName NVARCHAR(50) NOT NULL,\n" +
-				"Cost DECIMAL(18, 2) NOT NULL,\n" +  // Стоимость с поддержкой десятичных значений
-				"Discount NVARCHAR(50),\n" +         // Скидка может быть фиксированной или в процентах
-				"CostWithDiscount DECIMAL(18, 2) NOT NULL\n" + // Цена с учётом скидки, десятичные значения
+				"PerMin DECIMAL(18, 2) NOT NULL,\n" + // Цена за минуту
+				"Min INT NOT NULL,\n" +              // Количество минут
+				"Revenue DECIMAL(18, 2) NOT NULL\n" + // Доход
 				");";
 
 			// Выполнение команды
@@ -477,6 +520,7 @@ namespace DBC {
 	}
 
 
+
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Table_txt_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -489,7 +533,8 @@ namespace DBC {
 		try
 		{
 			// SQL command to select data
-			SqlDataAdapter^ sqlDataAdapter = gcnew SqlDataAdapter("SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text, connection);
+			SqlDataAdapter^ sqlDataAdapter = gcnew SqlDataAdapter(
+				"SELECT ID, TariffName, PerMin, Min, Revenue FROM " + Table_txt->Text, connection);
 			DataTable^ dataTable = gcnew DataTable();
 			sqlDataAdapter->Fill(dataTable);
 
@@ -501,6 +546,7 @@ namespace DBC {
 			MessageBox::Show("An error occurred: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
+
 
 	private: System::Void add_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
@@ -528,71 +574,30 @@ namespace DBC {
 				return;
 			}
 
-			// Получение и проверка значения Cost
-			double cost = Convert::ToDouble(Cost_txt_add->Text);
-			if (cost < 1) {
-				MessageBox::Show("The cost cannot be less than 1.",
+			// Получение и проверка значения PerMin
+			double perMin = Convert::ToDouble(PerMin_txt_add->Text);
+			if (perMin <= 0) {
+				MessageBox::Show("Price per minute must be greater than zero.",
 					"Error",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Error);
 				return;
 			}
 
-			// Получение и проверка значения Discount
-			String^ discountInput = Discount_txt_add->Text->Trim();
-			double discountValue;
-			double costWithDiscount;
-			bool isPercentage = false;
-
-			if (discountInput->EndsWith("%")) {
-				// Обработка процентной скидки
-				isPercentage = true;
-				String^ percentageValue = discountInput->Substring(0, discountInput->Length - 1);
-				discountValue = Convert::ToDouble(percentageValue);
-
-				if (discountValue < 0 || discountValue > 100) {
-					MessageBox::Show("Percentage discount must be between 0% and 100%.",
-						"Error",
-						MessageBoxButtons::OK,
-						MessageBoxIcon::Error);
-					return;
-				}
-
-				// Рассчитываем цену с учётом процентной скидки
-				costWithDiscount = cost - (cost * discountValue / 100);
-			}
-			else {
-				// Обработка фиксированной скидки
-				discountValue = Convert::ToDouble(discountInput);
-
-				if (discountValue > cost) {
-					MessageBox::Show("Fixed discount cannot be greater than the cost.",
-						"Error",
-						MessageBoxButtons::OK,
-						MessageBoxIcon::Error);
-					return;
-				}
-
-				// Рассчитываем цену с учётом фиксированной скидки
-				costWithDiscount = cost - discountValue;
-			}
-
-			// Округление цены с учётом скидки до 2 знаков после запятой
-			costWithDiscount = Math::Round(costWithDiscount, 2);
+			// Значение Min и Revenue не добавляются на этом этапе
+			// Revenue будет рассчитан при добавлении минут
 
 			// Подготовка команды для вставки данных
-			String^ insertQuery = "INSERT INTO " + Table_txt->Text + " (TariffName, Cost, Discount, CostWithDiscount) VALUES (@TariffName, @Cost, @Discount, @CostWithDiscount);";
+			String^ insertQuery = "INSERT INTO " + Table_txt->Text + " (TariffName, PerMin, Min, Revenue) VALUES (@TariffName, @PerMin, 0, 0);";
 			SqlCommand^ sqlCommand = gcnew SqlCommand(insertQuery, connection);
 
 			// Добавление параметров
 			sqlCommand->Parameters->AddWithValue("@TariffName", tariffName);
-			sqlCommand->Parameters->AddWithValue("@Cost", cost);
-			sqlCommand->Parameters->AddWithValue("@Discount", discountInput); // Сохраняем как введено пользователем
-			sqlCommand->Parameters->AddWithValue("@CostWithDiscount", costWithDiscount); // Сохраняем цену с учётом скидки
+			sqlCommand->Parameters->AddWithValue("@PerMin", perMin);
 
 			// Выполнение команды
 			sqlCommand->ExecuteNonQuery();
-			MessageBox::Show("Data added successfully.",
+			MessageBox::Show("Tariff added successfully.",
 				"Success",
 				MessageBoxButtons::OK,
 				MessageBoxIcon::Information);
@@ -602,8 +607,7 @@ namespace DBC {
 
 			// Очищаем поля ввода
 			Tariff_txt_add->Text = "";
-			Cost_txt_add->Text = "";
-			Discount_txt_add->Text = "";
+			PerMin_txt_add->Text = "";
 		}
 		catch (SqlException^ ex) {
 			MessageBox::Show("An error has occurred: " + ex->Message,
@@ -620,10 +624,11 @@ namespace DBC {
 	}
 
 
+
 	private: System::Void TariffName_search_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			// Подготовка команды поиска
-			String^ searchQuery = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text +
+			String^ searchQuery = "SELECT ID, TariffName, PerMin, Min, Revenue FROM " + Table_txt->Text +
 				" WHERE TariffName LIKE @SearchValue;";
 			SqlCommand^ sqlCommand = gcnew SqlCommand(searchQuery, connection);
 			sqlCommand->Parameters->AddWithValue("@SearchValue", "%" + TariffName_txt_search->Text + "%");
@@ -654,14 +659,15 @@ namespace DBC {
 	}
 
 
-	private: System::Void Cost_search_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	private: System::Void PerMin_search_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			// Получение значения для поиска
-			String^ searchValue = Cost_txt_search->Text->Trim();
+			String^ searchValue = PerMin_txt_search->Text->Trim();
 
 			// Проверка на пустой ввод
 			if (String::IsNullOrWhiteSpace(searchValue)) {
-				MessageBox::Show("Please enter a cost value to search.",
+				MessageBox::Show("Please enter a value for Per Minute to search.",
 					"Error",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Error);
@@ -669,9 +675,9 @@ namespace DBC {
 			}
 
 			// Проверка, является ли введённое значение числом
-			double costValue;
-			if (!Double::TryParse(searchValue, costValue)) {
-				MessageBox::Show("Please enter a valid numeric value for cost.",
+			double perMinValue;
+			if (!Double::TryParse(searchValue, perMinValue)) {
+				MessageBox::Show("Please enter a valid numeric value for Per Minute.",
 					"Error",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Error);
@@ -679,10 +685,10 @@ namespace DBC {
 			}
 
 			// Подготовка команды поиска
-			String^ searchQuery = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text +
-				" WHERE Cost = @SearchValue OR CostWithDiscount = @SearchValue;"; // Добавлен поиск по обоим полям
+			String^ searchQuery = "SELECT ID, TariffName, PerMin, Min, Revenue FROM " + Table_txt->Text +
+				" WHERE PerMin = @SearchValue;";
 			SqlCommand^ sqlCommand = gcnew SqlCommand(searchQuery, connection);
-			sqlCommand->Parameters->AddWithValue("@SearchValue", costValue);
+			sqlCommand->Parameters->AddWithValue("@SearchValue", perMinValue);
 
 			// Выполнение команды и заполнение таблицы результатами
 			SqlDataAdapter^ sqlDataAdapter = gcnew SqlDataAdapter(sqlCommand);
@@ -693,7 +699,7 @@ namespace DBC {
 			dataGridView1->DataSource = dataTable;
 
 			// Очистка поля поиска
-			Cost_txt_search->Text = "";
+			PerMin_txt_search->Text = "";
 		}
 		catch (SqlException^ ex) {
 			MessageBox::Show("An error occurred: " + ex->Message,
@@ -709,14 +715,24 @@ namespace DBC {
 		}
 	}
 
-	private: System::Void Discount_search_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void Revenue_search_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			// Получение значения для поиска
-			String^ searchValue = Discount_txt_search->Text->Trim();
+			String^ searchValue = Revenue_txt_search->Text->Trim();
 
 			// Проверка на пустой ввод
 			if (String::IsNullOrWhiteSpace(searchValue)) {
-				MessageBox::Show("Please enter a discount value to search.",
+				MessageBox::Show("Please enter a revenue value to search.",
+					"Error",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Error);
+				return;
+			}
+
+			// Проверка, является ли введённое значение числом
+			double revenueValue;
+			if (!Double::TryParse(searchValue, revenueValue)) {
+				MessageBox::Show("Please enter a valid numeric value for revenue.",
 					"Error",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Error);
@@ -724,54 +740,10 @@ namespace DBC {
 			}
 
 			// Подготовка команды поиска
-			String^ searchQuery;
-
-			// Проверяем, является ли скидка процентной (если заканчивается на %)
-			if (searchValue->EndsWith("%")) {
-				// Убираем символ "%" для точного поиска
-				String^ percentageValue = searchValue->Substring(0, searchValue->Length - 1);
-
-				// Проверяем, является ли введённое значение числом
-				double discountPercentage;
-				if (!Double::TryParse(percentageValue, discountPercentage) || discountPercentage < 0 || discountPercentage > 100) {
-					MessageBox::Show("Please enter a valid percentage discount (0% to 100%).",
-						"Error",
-						MessageBoxButtons::OK,
-						MessageBoxIcon::Error);
-					return;
-				}
-
-				// SQL-запрос для процентной скидки
-				searchQuery = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text +
-					" WHERE Discount LIKE @SearchValue;";
-			}
-			else {
-				// Проверяем, является ли введённая скидка числом для фиксированной скидки
-				double fixedDiscount;
-				if (!Double::TryParse(searchValue, fixedDiscount) || fixedDiscount < 0) {
-					MessageBox::Show("Please enter a valid fixed discount (greater than or equal to 0).",
-						"Error",
-						MessageBoxButtons::OK,
-						MessageBoxIcon::Error);
-					return;
-				}
-
-				// SQL-запрос для фиксированной скидки (поиск как строкового значения)
-				searchQuery = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text +
-					" WHERE Discount = @SearchValue;";
-			}
-
-			// Подготовка команды SQL
+			String^ searchQuery = "SELECT ID, TariffName, PerMin, Min, Revenue FROM " + Table_txt->Text +
+				" WHERE Revenue = @SearchValue;";
 			SqlCommand^ sqlCommand = gcnew SqlCommand(searchQuery, connection);
-
-			// Для процентной скидки ищем как строку с % (например "50%"), а для фиксированной передаём строку или число
-			if (searchValue->EndsWith("%")) {
-				sqlCommand->Parameters->AddWithValue("@SearchValue", searchValue);
-			}
-			else {
-				// Приводим к строке для корректного сравнения в базе
-				sqlCommand->Parameters->AddWithValue("@SearchValue", searchValue);
-			}
+			sqlCommand->Parameters->AddWithValue("@SearchValue", revenueValue);
 
 			// Выполнение команды и заполнение таблицы результатами
 			SqlDataAdapter^ sqlDataAdapter = gcnew SqlDataAdapter(sqlCommand);
@@ -780,7 +752,7 @@ namespace DBC {
 
 			// Проверка, есть ли результаты
 			if (dataTable->Rows->Count == 0) {
-				MessageBox::Show("No results found for the specified discount.",
+				MessageBox::Show("No results found for the specified revenue.",
 					"Info",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Information);
@@ -791,7 +763,7 @@ namespace DBC {
 			}
 
 			// Очистка поля поиска
-			Discount_txt_search->Text = "";
+			Revenue_txt_search->Text = "";
 		}
 		catch (SqlException^ ex) {
 			MessageBox::Show("An error occurred: " + ex->Message,
@@ -806,6 +778,7 @@ namespace DBC {
 				MessageBoxIcon::Error);
 		}
 	}
+
 
 	private: System::Void Delete_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
@@ -837,6 +810,11 @@ namespace DBC {
 				return;
 			}
 
+			// Проверяем подключение
+			if (connection->State != ConnectionState::Open) {
+				connection->Open();
+			}
+
 			// Подготовка команды SQL для проверки существования записи
 			String^ checkQuery = "SELECT COUNT(*) FROM " + Table_txt->Text + " WHERE ID = @ID;";
 			SqlCommand^ checkCommand = gcnew SqlCommand(checkQuery, connection);
@@ -844,6 +822,7 @@ namespace DBC {
 
 			// Выполнение команды для проверки существования записи
 			int count = (int)checkCommand->ExecuteScalar();
+			delete checkCommand; // Освобождаем ресурсы
 			if (count == 0) {
 				MessageBox::Show("No record found with the specified ID.",
 					"Info",
@@ -859,6 +838,8 @@ namespace DBC {
 
 			// Выполнение команды
 			int rowsAffected = deleteCommand->ExecuteNonQuery();
+			delete deleteCommand; // Освобождаем ресурсы
+
 			if (rowsAffected > 0) {
 				MessageBox::Show("Record deleted successfully.",
 					"Success",
@@ -866,10 +847,10 @@ namespace DBC {
 					MessageBoxIcon::Information);
 			}
 			else {
-				MessageBox::Show("No record found with the specified ID.",
-					"Info",
+				MessageBox::Show("Unexpected error: No records were deleted.",
+					"Error",
 					MessageBoxButtons::OK,
-					MessageBoxIcon::Information);
+					MessageBoxIcon::Error);
 			}
 
 			// Обновление отображения данных
@@ -891,6 +872,7 @@ namespace DBC {
 				MessageBoxIcon::Error);
 		}
 	}
+
 	private: System::Void refresh_Click(System::Object^ sender, System::EventArgs^ e) {
 		RefreshDataGridView(dataGridView1);
 	}
@@ -917,46 +899,138 @@ private: System::Void saveFileDialog1_FileOk(System::Object^ sender, System::Com
 	String^ filePath = saveFileDialog1->FileName; // Получить путь к файлу
 
 	try {
-
 		// SQL-запрос для извлечения данных из таблицы
-		String^ query = "SELECT ID, TariffName, Cost, Discount, CostWithDiscount FROM " + Table_txt->Text + ";";
+		String^ query = "SELECT ID, TariffName, PerMin, Min, Revenue FROM " + Table_txt->Text + ";";
 		SqlCommand^ command = gcnew SqlCommand(query, connection);
 
 		// Выполнение запроса и чтение данных
 		SqlDataReader^ reader = command->ExecuteReader();
 
-		// Открыть поток для записи в файл
+		// Проверка на наличие данных
+		if (!reader->HasRows) {
+			MessageBox::Show("No data found to export.", "Information", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			return;
+		}
+
+		// Открытие потока для записи в файл
 		std::ofstream outFile(msclr::interop::marshal_as<std::string>(filePath));
 		if (!outFile.is_open()) {
-			MessageBox::Show("Не удалось открыть файл для записи.", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Unable to open the file for writing.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 
 		// Запись заголовков столбцов
-		outFile << "ID\tTariffName\tCost\tDiscount\tCostWithDiscount\n";
+		outFile << "ID\tTariffName\tPerMin\tMin\tRevenue\n";
 
 		// Запись данных из базы в файл
 		while (reader->Read()) {
 			outFile << msclr::interop::marshal_as<std::string>(reader["ID"]->ToString()) << "\t"
 				<< msclr::interop::marshal_as<std::string>(reader["TariffName"]->ToString()) << "\t"
-				<< msclr::interop::marshal_as<std::string>(reader["Cost"]->ToString()) << "\t"
-				<< msclr::interop::marshal_as<std::string>(reader["Discount"]->ToString()) << "\t"
-				<< msclr::interop::marshal_as<std::string>(reader["CostWithDiscount"]->ToString()) << "\n";
+				<< msclr::interop::marshal_as<std::string>(reader["PerMin"]->ToString()) << "\t"
+				<< msclr::interop::marshal_as<std::string>(reader["Min"]->ToString()) << "\t"
+				<< msclr::interop::marshal_as<std::string>(reader["Revenue"]->ToString()) << "\n";
 		}
 
-		reader->Close();
-		outFile.close();
+		reader->Close();  // Закрытие SqlDataReader
+		outFile.close();  // Закрытие потока
 
-		MessageBox::Show("Файл успешно сохранен!", "Успех", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		// Уведомление об успешном сохранении
+		MessageBox::Show("File saved successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	catch (SqlException^ ex) {
+		MessageBox::Show("Database error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	catch (IOException^ ex) {
+		MessageBox::Show("File system error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("Ошибка при сохранении файла: " + ex->Message, "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show("An unexpected error occurred: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
+
 
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 	saveFileDialog1->ShowDialog(); // Открыть диалоговое окно сохранения файла
 }
+private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void RecordMinutes_button_Click(System::Object^ sender, System::EventArgs^ e) {
+	try {
+		// Получение значений из текстовых полей
+		String^ idValue = ID_txt_record->Text->Trim();
+		String^ minValue = Min_txt_Record->Text->Trim();
+
+		// Проверка на пустой ввод
+		if (String::IsNullOrWhiteSpace(idValue) || String::IsNullOrWhiteSpace(minValue)) {
+			MessageBox::Show("Please enter both ID and Minutes.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		// Проверка, является ли введённое значение ID числом
+		int id;
+		if (!Int32::TryParse(idValue, id)) {
+			MessageBox::Show("The ID must be a valid numeric value.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		// Проверка, является ли введённое количество минут числом
+		int minutes;
+		if (!Int32::TryParse(minValue, minutes) || minutes <= 0) {
+			MessageBox::Show("Please enter a valid number of minutes.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		// SQL-запрос для получения данных по ID (сразу возвращаем нужные значения)
+		String^ query = "SELECT PerMin, Min, Revenue FROM " + Table_txt->Text + " WHERE ID = @ID;";
+		SqlCommand^ command = gcnew SqlCommand(query, connection);
+		command->Parameters->AddWithValue("@ID", id);
+
+		// Выполнение запроса и извлечение значений в одну строку
+		DataTable^ dataTable = gcnew DataTable();
+		SqlDataAdapter^ dataAdapter = gcnew SqlDataAdapter(command);
+		dataAdapter->Fill(dataTable);
+
+		if (dataTable->Rows->Count == 0) {
+			MessageBox::Show("No record found with the specified ID.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		// Извлечение данных из первой строки
+		DataRow^ row = dataTable->Rows[0];
+
+		// Используем безопасное извлечение значений с проверкой на DBNull
+		double perMin = (row["PerMin"] != DBNull::Value) ? Convert::ToDouble(row["PerMin"]) : 0.0;
+		int currentMin = (row["Min"] != DBNull::Value) ? Convert::ToInt32(row["Min"]) : 0;
+		double currentRevenue = (row["Revenue"] != DBNull::Value) ? Convert::ToDouble(row["Revenue"]) : 0.0;
+
+		// Обновление количества минут и расчёт новой выручки
+		int newMin = currentMin + minutes;
+		double newRevenue = newMin * perMin;
+
+		// SQL-запрос для обновления записи
+		String^ updateQuery = "UPDATE " + Table_txt->Text + " SET Min = @NewMin, Revenue = @NewRevenue WHERE ID = @ID;";
+		SqlCommand^ updateCommand = gcnew SqlCommand(updateQuery, connection);
+		updateCommand->Parameters->AddWithValue("@NewMin", newMin);
+		updateCommand->Parameters->AddWithValue("@NewRevenue", newRevenue);
+		updateCommand->Parameters->AddWithValue("@ID", id);
+
+		// Выполнение обновления
+		updateCommand->ExecuteNonQuery();
+
+		MessageBox::Show("Record updated successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	catch (SqlException^ ex) {
+		MessageBox::Show("Database error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	catch (FormatException^ ex) {
+		MessageBox::Show("Format error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	catch (Exception^ ex) {
+		MessageBox::Show("An unexpected error occurred: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+}
+
+
 };
 }
 #endif // MAINWINDOW_H
